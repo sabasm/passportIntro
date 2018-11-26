@@ -10,6 +10,21 @@ function checkIfIsHere(req, res, next) {
   return res.redirect("/auth/login");
 }
 
+router.get(
+  "/callback/facebook",
+  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
+
+router.post("/facebook", passport.authenticate("facebook"), (req, res) => {});
+
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/auth/login");
+});
+
 router.get("/private", checkIfIsHere, (req, res) => {
   res.send("esto es privao");
 });
