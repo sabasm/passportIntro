@@ -7,19 +7,21 @@ function isAuth(req, res, next) {
   return res.redirect("/auth/login");
 }
 
-function canPublish(req, res, next) {
-  if (req.user.role !== "GUEST") return next();
-  return res.redirect("/posts");
+function checkIfIs(role) {
+  return function(req, res, next) {
+    if (req.user.role === role) return next();
+    return res.send({ message: `No eres un ${role}` });
+  };
 }
 
-router.post("/new", isAuth, canPublish, (req, res, next) => {
+router.post("/new", isAuth, checkIfIs("EDITOR"), (req, res, next) => {
   req.body.user = req.user._id;
   Post.create(req.body).then(post => {
     res.redirect("/posts");
   });
 });
 
-router.get("/new", isAuth, canPublish, (req, res, next) => {
+router.get("/new", isAuth, checkIfIs("ADMIN"), (req, res, next) => {
   res.render("posts/new");
 });
 
