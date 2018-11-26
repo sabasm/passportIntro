@@ -6,7 +6,12 @@ const userSchema = new Schema(
   {
     username: String,
     email: String,
-    facebookId: String
+    facebookId: String,
+    role: {
+      type: String,
+      enum: ["ADMIN", "EDITOR", "GUEST"],
+      default: "GUEST"
+    }
   },
   {
     timestamps: {

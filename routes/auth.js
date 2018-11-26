@@ -31,6 +31,7 @@ router.get("/private", checkIfIsHere, (req, res) => {
 
 router.post("/login", passport.authenticate("local"), (req, res, next) => {
   const email = req.user.email;
+  req.app.locals.user = req.user;
   res.send("Tu eres un usuario real con email: " + email);
 });
 
