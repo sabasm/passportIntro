@@ -1,4 +1,4 @@
-<form action="/restaurants/new" method="post">
+<form id="form" action="/restaurants/new" method="post">
   <input placeholder="Nombre del rest" name="name" type="text">
   <input id="geo" type="text">
   <input id="lat" name="lat" type="hidden">
@@ -6,7 +6,7 @@
   <input type="submit">
 </form>
 <div style="width:600px;height:600px" id="map"></div>
-
+<script src="/javascripts/script.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0iBJ86eZUGkhbuWhS7b4_B3-8cRYQgTQ&libraries=places"></script>
 <script>
 
